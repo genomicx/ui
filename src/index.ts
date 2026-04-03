@@ -12,6 +12,8 @@ export { ProgressBar } from './components/ProgressBar';
 export type { ProgressBarProps } from './components/ProgressBar';
 export { Alert } from './components/Alert';
 export type { AlertProps, AlertVariant } from './components/Alert';
+export { StatusBadge } from './components/StatusBadge';
+export type { StatusBadgeProps, StatusBadgeVariant } from './components/StatusBadge';
 
 // WASM loader
 export { loadWasmModule, createModuleInstance } from './wasm/loader';
