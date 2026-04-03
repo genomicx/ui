@@ -20,6 +20,7 @@
   --gx-code-bg: #f1f5f9;
   --gx-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   --gx-transition: 0.2s ease;
+  --gx-max-width: 1280px;
   --gx-radius: 8px;
   --gx-radius-lg: 12px;
 }

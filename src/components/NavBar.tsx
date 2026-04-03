@@ -6,13 +6,23 @@ export interface NavBarProps {
   appName: string;
   appSubtitle?: string;
   version?: string;
+  /** Custom SVG icon element. Defaults to GenomicX rings logo. */
+  icon?: ReactNode;
   /** Extra items in the desktop nav (right side, before theme toggle) */
   actions?: ReactNode;
   /** Extra items in the mobile dropdown */
   mobileActions?: ReactNode;
 }
 
-export function NavBar({ appName, appSubtitle, version, actions, mobileActions }: NavBarProps) {
+const DefaultIcon = () => (
+  <svg className="gx-nav-logo-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gx-accent)" strokeWidth="2">
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="6" />
+    <circle cx="12" cy="12" r="2" />
+  </svg>
+);
+
+export function NavBar({ appName, appSubtitle, version, icon, actions, mobileActions }: NavBarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -20,11 +30,7 @@ export function NavBar({ appName, appSubtitle, version, actions, mobileActions }
       <div className="gx-nav-inner">
         <div className="gx-nav-row">
           <Link to="/" className="gx-nav-logo">
-            <svg className="gx-nav-logo-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gx-accent)" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <circle cx="12" cy="12" r="6" />
-              <circle cx="12" cy="12" r="2" />
-            </svg>
+            {icon ?? <DefaultIcon />}
             <div>
               <h1 className="gx-nav-logo-name">
                 {appName}

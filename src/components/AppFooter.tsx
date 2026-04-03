@@ -1,9 +1,10 @@
 interface AppFooterProps {
   appName?: string;
   onReportBug?: () => void;
+  bugReportUrl?: string;
 }
 
-export function AppFooter({ appName = 'GenomicX', onReportBug }: AppFooterProps) {
+export function AppFooter({ appName = 'GenomicX', onReportBug, bugReportUrl }: AppFooterProps) {
   return (
     <footer className="gx-footer">
       <div className="gx-footer-inner">
@@ -16,7 +17,12 @@ export function AppFooter({ appName = 'GenomicX', onReportBug }: AppFooterProps)
             <a href="https://genomicx.org" target="_blank" rel="noopener noreferrer" className="gx-footer-link">
               genomicx.org
             </a>
-            {onReportBug && (
+            {bugReportUrl && (
+              <a href={bugReportUrl} target="_blank" rel="noopener noreferrer" className="gx-footer-link">
+                Report Bug
+              </a>
+            )}
+            {onReportBug && !bugReportUrl && (
               <button onClick={onReportBug} className="gx-footer-link">
                 Report Bug
               </button>
