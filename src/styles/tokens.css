@@ -16,6 +16,7 @@
   --gx-success: #0d9488;
   --gx-warning: #F59E0B;
   --gx-error: #EF4444;
+  --gx-accent-dim: rgba(13, 148, 136, 0.1);
   --gx-nav-bg: rgba(255, 255, 255, 0.9);
   --gx-code-bg: #f1f5f9;
   --gx-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -23,6 +24,7 @@
   --gx-max-width: 1280px;
   --gx-radius: 8px;
   --gx-radius-lg: 12px;
+  --gx-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 [data-theme="dark"] {
@@ -39,6 +41,7 @@
   --gx-accent: #2dd4bf;
   --gx-accent-hover: #14b8a6;
   --gx-indigo: #818cf8;
+  --gx-accent-dim: rgba(45, 212, 191, 0.12);
   --gx-nav-bg: rgba(15, 23, 42, 0.9);
   --gx-code-bg: #0f172a;
   --gx-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);

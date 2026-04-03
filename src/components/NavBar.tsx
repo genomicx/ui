@@ -8,6 +8,8 @@ export interface NavBarProps {
   version?: string;
   /** Custom SVG icon element. Defaults to GenomicX rings logo. */
   icon?: ReactNode;
+  /** GitHub repository URL shown in the nav header */
+  githubUrl?: string;
   /** Extra items in the desktop nav (right side, before theme toggle) */
   actions?: ReactNode;
   /** Extra items in the mobile dropdown */
@@ -22,7 +24,7 @@ const DefaultIcon = () => (
   </svg>
 );
 
-export function NavBar({ appName, appSubtitle, version, icon, actions, mobileActions }: NavBarProps) {
+export function NavBar({ appName, appSubtitle, version, icon, githubUrl, actions, mobileActions }: NavBarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -43,12 +45,14 @@ export function NavBar({ appName, appSubtitle, version, icon, actions, mobileAct
           <div className="gx-nav-desktop">
             {actions}
             <Link to="/about" className="gx-nav-link">About</Link>
-            <a href="https://github.com/happykhan" target="_blank" rel="noopener noreferrer" className="gx-nav-link">
-              GitHub
-              <svg className="gx-nav-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
+            {githubUrl && (
+              <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="gx-nav-link">
+                GitHub
+                <svg className="gx-nav-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            )}
             <ThemeToggle />
           </div>
 
@@ -73,7 +77,7 @@ export function NavBar({ appName, appSubtitle, version, icon, actions, mobileAct
         <div className="gx-nav-dropdown">
           {mobileActions}
           <Link to="/about" onClick={() => setMenuOpen(false)} className="gx-nav-dropdown-link">About</Link>
-          <a href="https://github.com/happykhan" target="_blank" rel="noopener noreferrer" className="gx-nav-dropdown-link">GitHub ↗</a>
+          {githubUrl && <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="gx-nav-dropdown-link">GitHub ↗</a>}
         </div>
       )}
     </nav>
