@@ -10,6 +10,8 @@ export { FileUpload } from './components/FileUpload';
 export type { FileUploadProps } from './components/FileUpload';
 export { ProgressBar } from './components/ProgressBar';
 export type { ProgressBarProps } from './components/ProgressBar';
+export { Alert } from './components/Alert';
+export type { AlertProps, AlertVariant } from './components/Alert';
 
 // WASM loader
 export { loadWasmModule, createModuleInstance } from './wasm/loader';
