@@ -9,9 +9,9 @@ interface AppShellProps extends NavBarProps {
 
 export function AppShell({ children, onReportBug, ...navProps }: AppShellProps) {
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'var(--gx-bg)' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--gx-bg)' }}>
       <NavBar {...navProps} />
-      <main className="flex-1">
+      <main style={{ flex: 1 }}>
         {children}
       </main>
       <AppFooter appName={navProps.appName} onReportBug={onReportBug} />
