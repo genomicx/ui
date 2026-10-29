@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.1 — 2026-10-29
+
+- Restore the published 0.9.1 `parseGenbankString` and `parseSequenceFile` exports and TypeScript declarations omitted from the GitHub source.
+- Preserve prior FASTA, GenBank, filename detection and gzip parsing behaviour. The 0.10.0 theme and assets are unchanged.
+- Add compatibility tests against the original published parser functions and public export list.
+
 ## 0.10.0 — 2026-10-29
 
 - Replace teal defaults with neutral light/dark surfaces, a charcoal header and blue actions.

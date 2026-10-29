@@ -21,6 +21,7 @@ export type { EmscriptenModule, WasmModuleFactory } from './wasm/types';
 
 // Utils
 export { downloadBlob, downloadText, downloadBuffer } from './utils/download';
+export { parseGenbankString, parseSequenceFile } from './utils/parseSequence';
 
 // Types
 export type { ProgressUpdate } from './types/progress';
