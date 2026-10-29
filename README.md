@@ -16,12 +16,12 @@ npm install react react-dom react-router-dom react-hot-toast
 
 ## Setup
 
-Import the CSS in your app's global stylesheet, **after** your Tailwind directives:
+Import the CSS in your app's global stylesheet, **before** Tailwind:
 
 ```css
-@import "tailwindcss";
 @import '@genomicx/ui/styles/tokens.css';
 @import '@genomicx/ui/styles/components.css';
+@import "tailwindcss";
 ```
 
 Init the theme on load (prevents flash of wrong theme):
@@ -92,13 +92,17 @@ import { AppFooter } from '@genomicx/ui'
 
 ### `LogConsole`
 
-Collapsible debug console for displaying WASM stderr/stdout.
+Readable console for displaying WASM stderr/stdout.
 
 ```tsx
 import { LogConsole } from '@genomicx/ui'
 
 <LogConsole logs={logLines} />
-<LogConsole logs={logLines} progress="Running BLAST..." title="Debug Console" />
+<LogConsole
+  logs={logLines}
+  progress={{ step: 'Running analysis', percent: 50, message: 'Processing files' }}
+  title="Debug Console"
+/>
 ```
 
 **Props**
@@ -106,14 +110,14 @@ import { LogConsole } from '@genomicx/ui'
 | Prop | Type | Description |
 |------|------|-------------|
 | `logs` | `string[]` | Log lines to display |
-| `progress` | `string` | Optional current progress message shown at top |
+| `progress` | `ProgressUpdate` | Optional `{ step, percent, message? }` shown above the log |
 | `title` | `string` | Console title (default: `"Console"`) |
 
 ---
 
 ### `ThemeToggle`
 
-Pill-style dark/light theme switcher. Already included in `NavBar` — use standalone only if building a custom nav.
+Dark/light theme switcher. Already included in `NavBar` — use standalone only if building a custom nav.
 
 ```tsx
 import { ThemeToggle } from '@genomicx/ui'
@@ -182,15 +186,32 @@ All tokens are CSS custom properties on `:root` / `[data-theme]`. Key tokens:
 
 | Token | Light | Dark | Usage |
 |-------|-------|------|-------|
-| `--gx-accent` | `#0d9488` | `#2dd4bf` | Primary accent (teal) |
-| `--gx-bg` | `#f8fafc` | `#0d1117` | Page background |
-| `--gx-bg-alt` | `#fff` | `#161b22` | Card/panel background |
-| `--gx-text` | `#0f172a` | `#e6edf3` | Body text |
-| `--gx-text-muted` | `#64748b` | `#8b949e` | Secondary text |
-| `--gx-border` | `#e2e8f0` | `#30363d` | Borders |
-| `--gx-gradient` | — | — | Accent gradient (button backgrounds) |
-| `--gx-font-sans` | — | — | `Inter, system-ui, sans-serif` |
-| `--gx-font-mono` | — | — | `JetBrains Mono, monospace` |
+| `--gx-accent` | `#245db4` | `#90b7f0` | Actions and selections |
+| `--gx-bg` | `#f5f6f7` | `#191c21` | Page background |
+| `--gx-bg-alt` | `#ffffff` | `#23272e` | Panels |
+| `--gx-text` | `#25282e` | `#e9ecf1` | Body text |
+| `--gx-text-muted` | `#5d636d` | `#b0b7c2` | Secondary text |
+| `--gx-border` | `#cbd0d7` | `#424953` | Borders |
+| `--gx-nav-bg` | `#1c2027` | `#14171b` | Opaque navigation |
+| `--gx-disabled-bg` | `#e4e7eb` | `#343b46` | Inactive buttons |
+| `--gx-disabled-text` | `#505965` | `#e4e9f0` | Readable inactive labels |
+| `--gx-gradient` | Accent colour | Accent colour | Existing token now resolves to a solid fill |
+| `--gx-font-sans` | IBM Plex Sans | IBM Plex Sans | Interface text |
+| `--gx-font-mono` | IBM Plex Mono | IBM Plex Mono | Console and technical values |
+
+### Typography
+
+Importing `tokens.css` loads the bundled IBM Plex fonts from this package. No Google Fonts link or external font service is required. The Latin WOFF2 files are licensed under the SIL Open Font License; their notices and source versions are included in `src/styles/fonts/`. Other scripts use the configured system fallbacks.
+
+Console output uses IBM Plex Mono at 14px with a 1.65 line height, neutral text, preserved whitespace and wrapping for long lines. The console displays the supplied strings unchanged; timestamps and log levels remain the responsibility of the application.
+
+### Updating from 0.9.x
+
+```bash
+npm install @genomicx/ui@^0.10.0
+```
+
+Remove old Inter and JetBrains Mono font imports from consuming applications. The existing component APIs, CSS import paths and theme attributes are unchanged. The new defaults use neutral surfaces, blue actions, a charcoal header, smaller corners and readable inactive button labels. Local application CSS can override shared rules, so check each app after updating; layouts and analysis logic remain owned by the application.
 
 ---
 
@@ -282,4 +303,4 @@ npm run build
 npm publish --access public
 ```
 
-Requires membership in the `@genomicx` npm org and an Automation token in `~/.npmrc`.
+Requires publish access to `@genomicx/ui` and an authenticated npm session. Use `npm login` before publishing; npm may also require two-factor authentication.
